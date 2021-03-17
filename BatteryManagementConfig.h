@@ -7,13 +7,24 @@ typedef struct
 }BatteryLimitConfig;
 
 
+enum Language
+{
+	English,
+	German,
+	Language_Max  // Add the new languages above this variable only.
+};
+
+int Alert_Language = English; // Default alert message is English
+
+
+
 typedef struct
 {  // Index 0 - Alert in English 1 - Alert in German
-	char Low_Critical_Alertmessage [2][50];	// Alert message when measured value is lower than Low_Critical_range
-	char Low_Warning_Alertmessage [2][50];	// Warning message when measured value is < Low_Warning_range and > Low_Critical_range value
-	char Normal_Alertmessage [2][50];	// Alert message when measured value is in normal_range value
-	char High_Warning_Alertmessage [2][50];	// Warning message when measured value is > High_Warning_range and < High_Critical_range value
-	char High_Critical_Alertmessage [2][50];// Alert message when measured value is Higher than High_Critical_range
+	char Low_Critical_Alertmessage [Language_Max][50];	// Alert message when measured value is lower than Low_Critical_range
+	char Low_Warning_Alertmessage [Language_Max][50];	// Warning message when measured value is < Low_Warning_range and > Low_Critical_range value
+	char Normal_Alertmessage [Language_Max][50];	// Alert message when measured value is in normal_range value
+	char High_Warning_Alertmessage [Language_Max][50];	// Warning message when measured value is > High_Warning_range and < High_Critical_range value
+	char High_Critical_Alertmessage [Language_Max][50];// Alert message when measured value is Higher than High_Critical_range
 }BatteryAlertmessageConfig;
 
 
@@ -24,7 +35,6 @@ typedef struct
 	BatteryAlertmessageConfig Alertmessage;
 }BatteryManagementConfig;
  
-
 
 BatteryManagementConfig temperature_config=	\
 {\
@@ -79,15 +89,9 @@ BatteryManagementConfig chargeRate_config=\
 	}\
 };
 
-enum Language
-{
-	English,
-	German
-};
-
-int Alert_Language=English;
 
 enum BatteryHealth{
 	HEALTH_NOT_OK,
 	HEALTH_OK
 };
+
